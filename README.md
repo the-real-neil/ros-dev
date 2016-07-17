@@ -6,4 +6,4 @@
 An [alpine linux][alpine_linux] environment for [ros][ros] development
 
 [alpine_linux]:https://www.alpinelinux.org/
-[ros]:https://www.ros.org/
+[ros]:http://www.ros.org/

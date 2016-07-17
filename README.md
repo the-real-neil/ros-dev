@@ -3,4 +3,7 @@
 
 # alpine-ros
 
-alpine linux ros development environment
+An [alpine linux][alpine_linux] environment for [ros][ros] development
+
+[alpine_linux]:https://www.alpinelinux.org/
+[ros]:https://www.ros.org/

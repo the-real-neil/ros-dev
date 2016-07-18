@@ -1,12 +1,18 @@
-# alpine-ros/Dockerfile
+# debian-ros/Dockerfile
 
-from frolvlad/alpine-python3
+from debian
+
+env DEBIAN_FRONTEND noninteractive
 
 run \
-  set -euo pipefail && \
-  apk update && \
-  apk upgrade && \
-  apk add ca-certificates && \
+  apt-get -y update && \
+  apt-get -y install ca-certificates apt-utils && \
+  apt-get -y upgrade && \
+  apt-get -y install build-essential curl python3
+
+run \
+  ln -vsf $(command -v python3) $(dirname $(command -v python3))/python && \
+  curl -sL https://bootstrap.pypa.io/get-pip.py | python && \
   pip list | awk '{print $1}' | xargs pip install --upgrade && \
   pip install --upgrade \
     setuptools \
@@ -19,10 +25,7 @@ run \
     rosinstall \
     && \
   rosdep init && \
-  source /etc/os-release && \
-  export ROS_OS_OVERRIDE="$ID:$VERSION_ID" && \
-  echo $ROS_OS_OVERRIDE && \
   rosdep update && \
   date -uIs | tee timestamp.txt
 
-cmd /bin/sh
+cmd /bin/bash

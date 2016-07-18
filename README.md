@@ -1,9 +1,9 @@
-[![Docker Pulls](https://img.shields.io/docker/pulls/rubicks/alpine-ros.svg)](https://hub.docker.com/r/rubicks/alpine-ros/)
-[![Docker Stars](https://img.shields.io/docker/stars/rubicks/alpine-ros.svg?style=flat-square)](https://hub.docker.com/r/rubicks/alpine-ros/)
+[![Docker Pulls](https://img.shields.io/docker/pulls/rubicks/debian-ros.svg)](https://hub.docker.com/r/rubicks/debian-ros/)
+[![Docker Stars](https://img.shields.io/docker/stars/rubicks/debian-ros.svg?style=flat-square)](https://hub.docker.com/r/rubicks/debian-ros/)
 
-# alpine-ros
+# debian-ros
 
-An [alpine linux][alpine_linux] environment for [ros][ros] development
+A [debian][debian] environment for [ros][ros] development
 
-[alpine_linux]:https://www.alpinelinux.org/
+[debian]:https://www.debian.org/
 [ros]:http://www.ros.org/

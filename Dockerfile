@@ -5,7 +5,7 @@ from debian
 env DEBIAN_FRONTEND noninteractive
 
 run \
-  apt-get -y update && \
+  apt-get -y --fix-missing update && \
   apt-get -y install ca-certificates apt-utils && \
   apt-get -y upgrade && \
   apt-get -y install build-essential curl python3

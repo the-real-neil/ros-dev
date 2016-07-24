@@ -4,15 +4,14 @@ from ubuntu
 
 env DEBIAN_FRONTEND noninteractive
 
-# http://wiki.ros.org/kinetic/Installation/Ubuntu
-
 run apt-get -y --fix-missing update
 
 run apt-get -y install ca-certificates apt-utils
 
-run apt-get -y install software-properties-common
+# http://wiki.ros.org/kinetic/Installation/Ubuntu
 
 # configure Ubuntu repositories
+run apt-get -y install software-properties-common
 run apt-add-repository universe
 run apt-add-repository multiverse
 run apt-add-repository restricted

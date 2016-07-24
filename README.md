@@ -3,7 +3,6 @@
 
 # ros-dev
 
-A [debian][debian] environment for [ros][ros] development
+A docker image for [ROS][ros] project development.
 
-[debian]:https://www.debian.org/
 [ros]:http://www.ros.org/

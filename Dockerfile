@@ -2,19 +2,21 @@
 
 from ubuntu
 
+# prelude
 env DEBIAN_FRONTEND noninteractive
+run \
+  apt-get -y --fix-missing update && \
+  apt-get -y install ca-certificates apt-utils
 
-run apt-get -y --fix-missing update
-
-run apt-get -y install ca-certificates apt-utils
 
 # http://wiki.ros.org/kinetic/Installation/Ubuntu
 
 # configure Ubuntu repositories
-run apt-get -y install software-properties-common
-run apt-add-repository universe
-run apt-add-repository multiverse
-run apt-add-repository restricted
+run \
+  apt-get -y install software-properties-common && \
+  apt-add-repository universe && \
+  apt-add-repository multiverse && \
+  apt-add-repository restricted
 
 run \
   apt-get -y --fix-missing update && \

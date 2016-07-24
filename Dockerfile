@@ -1,49 +1,53 @@
 # debian-ros/Dockerfile
 
-from debian
+from ubuntu
 
 env DEBIAN_FRONTEND noninteractive
 
-# http://wiki.ros.org/kinetic/Installation/Source
+# http://wiki.ros.org/kinetic/Installation/Ubuntu
+
+run apt-get -y --fix-missing update
+
+run apt-get -y install ca-certificates apt-utils
+
+run apt-get -y install software-properties-common
+
+# configure Ubuntu repositories
+run apt-add-repository universe
+run apt-add-repository multiverse
+run apt-add-repository restricted
+
 run \
   apt-get -y --fix-missing update && \
   apt-get -y install ca-certificates apt-utils && \
   apt-get -y upgrade && \
-  apt-get -y install build-essential curl python3
+  apt-get -y install build-essential curl python locales-all
+
+env LC_ALL en_US.utf8
+
+# set up sources list
+run \
+  apt-get -y install lsb-release && \
+  echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" \
+  >/etc/apt/sources.list.d/ros-latest.list && \
+  cat /etc/apt/sources.list.d/ros-latest.list
+
+# set up keys
+run \
+  apt-key adv --verbose \
+  --keyserver hkp://ha.pool.sks-keyservers.net:80 \
+  --recv-key 0xB01FA116 && \
+  apt-key adv --verbose --list-keys
+
+run apt-get -y update
+
+run apt-get -y install ros-kinetic-ros-base
 
 run \
-  ln -vsf $(command -v python3) $(dirname $(command -v python3))/python && \
-  curl -sL https://bootstrap.pypa.io/get-pip.py | python && \
-  pip list | awk '{print $1}' | xargs pip install --upgrade && \
-  pip install --upgrade \
-    nose \
-    setuptools \
-    && \
-  pip install --upgrade \
-    rosdep \
-    rosinstall_generator \
-    wstool \
-    rosinstall \
-    && \
   rosdep init && \
   rosdep update && \
   date -uIs | tee timestamp.txt
 
-workdir /ros_catkin_ws
-
-run \
-  rosinstall_generator ros_comm \
-    --rosdistro kinetic \
-    --deps \
-    --wet-only \
-    --tar > kinetic-ros_comm-wet.rosinstall && \
-  wstool init src kinetic-ros_comm-wet.rosinstall
-
-run locale
-
-# rosdep install \
-#   --from-paths src \
-#   --ignore-src \
-#   --rosdistro kinetic -y
+run apt-get -y install python-rosinstall
 
 cmd /bin/bash

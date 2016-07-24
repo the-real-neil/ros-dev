@@ -1,7 +1,7 @@
-[![Docker Pulls](https://img.shields.io/docker/pulls/rubicks/debian-ros.svg)](https://hub.docker.com/r/rubicks/debian-ros/)
-[![Docker Stars](https://img.shields.io/docker/stars/rubicks/debian-ros.svg?style=flat-square)](https://hub.docker.com/r/rubicks/debian-ros/)
+[![Docker Pulls](https://img.shields.io/docker/pulls/rubicks/ros-dev.svg)](https://hub.docker.com/r/rubicks/ros-dev/)
+[![Docker Stars](https://img.shields.io/docker/stars/rubicks/ros-dev.svg?style=flat-square)](https://hub.docker.com/r/rubicks/ros-dev/)
 
-# debian-ros
+# ros-dev
 
 A [debian][debian] environment for [ros][ros] development
 

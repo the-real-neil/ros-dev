@@ -1,4 +1,4 @@
-# debian-ros/Dockerfile
+# ros-dev/Dockerfile
 
 from ubuntu
 

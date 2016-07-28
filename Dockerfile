@@ -11,44 +11,42 @@ run \
 
 # http://wiki.ros.org/kinetic/Installation/Ubuntu
 
-# configure Ubuntu repositories
+# 1.1  configure Ubuntu repositories
 run \
   apt-get -y install software-properties-common && \
   apt-add-repository universe && \
   apt-add-repository multiverse && \
   apt-add-repository restricted
 
-run \
-  apt-get -y --fix-missing update && \
-  apt-get -y install ca-certificates apt-utils && \
-  apt-get -y upgrade && \
-  apt-get -y install build-essential curl python locales-all
-
-env LC_ALL en_US.utf8
-
-# set up sources list
+# 1.2  set up sources list
 run \
   apt-get -y install lsb-release && \
   echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" \
   >/etc/apt/sources.list.d/ros-latest.list && \
   cat /etc/apt/sources.list.d/ros-latest.list
 
-# set up keys
+# 1.3  set up keys
 run \
   apt-key adv --verbose \
   --keyserver hkp://ha.pool.sks-keyservers.net:80 \
   --recv-key 0xB01FA116 && \
   apt-key adv --verbose --list-keys
 
-run apt-get -y update
-
-run apt-get -y install ros-kinetic-ros-base
-
+# 1.4  installation
 run \
-  rosdep init && \
-  rosdep update && \
-  date -uIs | tee timestamp.txt
+  apt-get -y update && \
+  apt-get -y install ros-kinetic-ros-base
 
+# 1.5  initialize rosdep
+run rosdep init && rosdep update
+
+# 1.6  environment setup
+run cd && echo "source /opt/ros/kinetic/setup.bash" >> .bashrc
+
+# 1.7  getting rosinstall
 run apt-get -y install python-rosinstall
+
+# stamp the build
+run date -uIs | tee timestamp.txt
 
 cmd /bin/bash

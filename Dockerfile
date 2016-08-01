@@ -2,9 +2,11 @@
 
 from ubuntu
 
-# prelude
+# boilerplate prelude
 env DEBIAN_FRONTEND noninteractive
 run \
+  rm /bin/sh && \
+  ln -s /bin/bash /bin/sh && \
   apt-get -y --fix-missing update && \
   apt-get -y install ca-certificates apt-utils
 
@@ -45,6 +47,18 @@ run cd && echo "source /opt/ros/kinetic/setup.bash" >> .bashrc
 
 # 1.7  getting rosinstall
 run apt-get -y install python-rosinstall
+
+# http://wiki.ros.org/ROS/Tutorials/InstallingandConfiguringROSEnvironment
+
+# create a ros workspace
+run \
+  source /opt/ros/kinetic/setup.bash && \
+  mkdir -vp catkin_ws/src && \
+  cd catkin_ws/src && \
+  catkin_init_workspace && \
+  cd .. && \
+  catkin_make
+
 
 # stamp the build
 run date -uIs | tee timestamp.txt

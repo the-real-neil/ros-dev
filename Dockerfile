@@ -59,7 +59,6 @@ run \
   cd .. && \
   catkin_make
 
-
 # stamp the build
 run date -uIs | tee timestamp.txt
 
